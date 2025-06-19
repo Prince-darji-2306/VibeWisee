@@ -93,7 +93,7 @@ if st.session_state.mode == "Set Vibe":
 
     with col2:
         query_input = st.text_input(
-            label="",
+            label='Set Your VIBE😉',
             key="query_input",
             placeholder="Song or Artist Name....",
             label_visibility="hidden"
@@ -110,6 +110,8 @@ if st.session_state.mode == "Set Vibe":
                 query_input = selection
 
     with col3:
+
+        st.markdown("<div class='mbutton'></div>", unsafe_allow_html=True)
         if st.button("Recommend", use_container_width=True) and query_input.strip() != '':
             with st.spinner("Setting Vibe..."):
                 model = load_model()
