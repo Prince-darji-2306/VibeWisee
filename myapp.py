@@ -8,12 +8,10 @@ from sentence_transformers import SentenceTransformer
 from youtubesearchpython import VideosSearch
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# Paths
 MODEL_PATH = "model/song_recommender_model"
 INDEX_PATH = "model/song_index.faiss"
 CSV_PATH = "model/song_metadata.csv"
 
-# Loaders
 @st.cache_resource
 def load_model():
     return SentenceTransformer(MODEL_PATH)
@@ -29,7 +27,6 @@ def load_data():
         df['searchq'] = (df['song'] + " " + df['artist']).str.strip().str.lower()
     return df
 
-# Helpers
 def recommend(query, top_k=5):
     emb = normalize(model.encode([query]))
     _, I = index.search(emb, top_k)
@@ -55,7 +52,7 @@ def get_youtube(song, artist=None):
         return None, None
     return None, None
 
-# Init session state
+# Initializing session state
 if "mode" not in st.session_state:
     st.session_state.mode = "Set Vibe"
 if "results" not in st.session_state:
@@ -63,18 +60,15 @@ if "results" not in st.session_state:
 if "video_url" not in st.session_state:
     st.session_state.video_url = ""
 
-# Set page
 st.set_page_config(page_title="VibeWise | Discover Your Next Favorite Song", layout="wide",page_icon='static/img/icon.png')
 
 
-# Load CSS
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 local_css("static/css/mstyle.css")
 
-# Sidebar buttons
 st.sidebar.markdown("## Navigation")
 if st.sidebar.button("Set Vibe 🎧"):
     st.session_state.mode = "Set Vibe"

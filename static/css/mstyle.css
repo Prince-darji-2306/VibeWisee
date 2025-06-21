@@ -8,12 +8,6 @@ body {
     font-family: Arial, sans-serif;
 }  
 
-.main {
-    background: url('/static/img/song.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-}
-
 .custom-container {
     background: rgba(255,255,255,0.92);
     padding: 2rem;
